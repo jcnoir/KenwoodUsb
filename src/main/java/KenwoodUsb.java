@@ -43,6 +43,7 @@ public class KenwoodUsb {
 
         if (!sourceFolder.isDirectory()) {
             LOG.warn("The source directory does not exist : " + sourceFolder);
+            return;
         }
 
         this.firstAvaliableFolder = getAvailableFolder(targetFolder);
