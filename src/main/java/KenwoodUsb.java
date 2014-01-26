@@ -42,14 +42,14 @@ public class KenwoodUsb {
     private void copy(File sourceFolder, File targetFolder) {
 
         if (!sourceFolder.isDirectory()) {
-            LOG.warn("The source directory does not exist : " + sourceFolder);
+            LOG.error("The source directory does not exist : " + sourceFolder);
             return;
         }
 
         this.firstAvaliableFolder = getAvailableFolder(targetFolder);
 
         if (firstAvaliableFolder == null) {
-            LOG.warn("The target directory is full or does not exist : " + targetFolder);
+            LOG.error("The target directory is full or does not exist : " + targetFolder);
             return;
         }
 
@@ -60,7 +60,7 @@ public class KenwoodUsb {
         for (File file : sourceFiles) {
 
             if (targetFolder.getFreeSpace() < MIN_DISK_SPACE) {
-                LOG.warn("No more disk space");
+                LOG.error("No more disk space");
                 return;
             }
             String targetFileName = Math.abs(file.getAbsolutePath().hashCode()) + "." + FilenameUtils.getExtension(file.getName());
@@ -75,7 +75,7 @@ public class KenwoodUsb {
                         return;
                     }
                 } catch (Exception ex) {
-                    LOG.debug(fileCounter + "/" + sourceFiles.size() + " : Copy failure for : " + file + " : " + ex);
+                    LOG.error(fileCounter + "/" + sourceFiles.size() + " : Copy failure for : " + file + " : " + ex);
                 }
             } else {
                 LOG.debug(fileCounter + "/" + sourceFiles.size() + " : Copy already exists in target folder : " + file.getName());
