@@ -69,6 +69,9 @@ public class KenwoodUsb {
                     if (targetSubDir != null) {
                         LOG.debug(fileCounter + "/" + sourceFiles.size() + " : Copy : " + file.getName() + " --> " + targetSubDir.getName() + "/" + targetFileName);
                         FileUtils.copyFile(file, new File(targetSubDir, targetFileName));
+                    } else {
+                        LOG.error("Maximum folder number reached !");
+                        return;
                     }
                 } catch (Exception ex) {
                     LOG.debug(fileCounter + "/" + sourceFiles.size() + " : Copy failure for : " + file + " : " + ex);
