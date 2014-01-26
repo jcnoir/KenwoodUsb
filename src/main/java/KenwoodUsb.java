@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.Collection;
 
 /**
+ * Copy music files from a folder to an other one (USB key ...) with the Kenwood limitations (folder llimit, file limit ...) :
  * http://www.kenwood.com/cs/ce/audiofile/index.php?model=DNX7230DAB&lang=english
  */
 public class KenwoodUsb {
