@@ -60,7 +60,7 @@ public class KenwoodUsb {
         for (File file : sourceFiles) {
 
             if (targetFolder.getFreeSpace() < MIN_DISK_SPACE) {
-                LOG.error("No more disk space");
+                LOG.error("Not enough disk space : " + targetFolder.getFreeSpace() / (1024 * 1024) + "MB available");
                 return;
             }
             String targetFileName = Math.abs(file.getAbsolutePath().hashCode()) + "." + FilenameUtils.getExtension(file.getName());
@@ -68,6 +68,12 @@ public class KenwoodUsb {
                 try {
                     File targetSubDir = getAvailableFolder(targetFolder);
                     if (targetSubDir != null) {
+
+                        if (targetFolder.getFreeSpace() < file.length()) {
+                            LOG.error("Not enough disk space : " + targetFolder.getFreeSpace() / (1024 * 1024) + "MB available");
+                            return;
+                        }
+
                         LOG.debug(fileCounter + "/" + sourceFiles.size() + " : Copy : " + file.getName() + " --> " + targetSubDir.getName() + "/" + targetFileName);
                         FileUtils.copyFile(file, new File(targetSubDir, targetFileName));
                     } else {
